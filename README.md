@@ -1,0 +1,1 @@
+Курс по Fastify: https://github.com/billowdev/nodejs-typescript-fastify-course
