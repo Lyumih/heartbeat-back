@@ -1,7 +1,7 @@
 import { aql } from 'arangojs';
 import { db } from '../../db'
 
-export const getArticle = async () => {
+export const getRepo = async () => {
 
   const cursor = await db.query(aql`
     FOR repo in Repo
@@ -12,4 +12,4 @@ export const getArticle = async () => {
 
 }
 
-export default { getArticle }
+export default { getRepo }

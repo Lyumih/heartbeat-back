@@ -1,7 +1,7 @@
 import fastify, { FastifyServerOptions } from "fastify";
 import 'dotenv/config'
 
-import { articleRouter } from './routes';
+import { repoRouter } from './routes';
 import cors from '@fastify/cors'
 
 const App = (options: FastifyServerOptions) => {
@@ -10,7 +10,7 @@ const App = (options: FastifyServerOptions) => {
   app.register(cors)
 
   app.get("/ping", async () => "SERVER");
-  app.register(articleRouter, { prefix: "/api/v1/articles" })
+  app.register(repoRouter, { prefix: "/api/v1/repos" })
 
   app.get("/api/v1/user/me", async () => {
     return {

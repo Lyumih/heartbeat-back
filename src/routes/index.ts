@@ -1,3 +1,3 @@
-import articleRouter from './article/article.route';
+import repoRouter from './repo/repo.route';
 
-export { articleRouter };
+export { repoRouter };
