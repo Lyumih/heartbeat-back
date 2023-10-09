@@ -1,5 +1,5 @@
 import { FastifyInstance } from 'fastify';
-import { articleController } from '../controllers';
+import articleController from './article.controller';
 
 const articleRouter = async (app: FastifyInstance) => {
 

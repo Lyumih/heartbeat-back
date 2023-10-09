@@ -1,16 +1,10 @@
 import { Database, aql } from "arangojs";
-const db = new Database();
 
-(async function() {
-  const now = Date.now();
-  try {
-    const cursor = await db.query(aql`
-      RETURN ${now}
-    `);
-    const result = await cursor.next();
-    console.log(result)
-    // ...
-  } catch (err) {
-    // ...
+export const db = new Database({
+  url: process.env.DB_URL,
+  databaseName: process.env.DB_NAME,
+  auth: {
+    username: process.env.DB_USERNAME || "",
+    password: process.env.DB_PASSWORD,
   }
-})();
+});

@@ -1,3 +1,3 @@
-import articleRouter from './article.route';
+import articleRouter from './article/article.route';
 
 export { articleRouter };

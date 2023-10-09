@@ -1,48 +1,13 @@
 import fastify, { FastifyServerOptions } from "fastify";
 import 'dotenv/config'
-import { Database, aql } from "arangojs";
 
 import { articleRouter } from './routes';
 import cors from '@fastify/cors'
-
-const db = new Database({
-  url: process.env.DB_URL,
-  databaseName: process.env.DB_NAME,
-  auth: {
-    username: process.env.DB_USERNAME || "",
-    password: process.env.DB_PASSWORD,
-  }
-});
-const Pokemons = db.collection("my-pokemons");
-
-
-
-async function poc() {
-  try {
-    const pokemons = await db.query(aql`
-      FOR pokemon IN ${Pokemons}
-      FILTER pokemon.type == "fire"
-      RETURN pokemon
-    `);
-    console.log("My pokemons, let me show you them:");
-    for await (const pokemon of pokemons) {
-      console.log(pokemon.name);
-    }
-  } catch (err) {
-    console.error(err);
-  }
-}
 
 const App = (options: FastifyServerOptions) => {
   const app = fastify(options)
 
   app.register(cors)
-
-  console.log('test3')
-  // console.log(db)
-
-  poc()
-  console.log(process.env)
 
   app.get("/ping", async () => "SERVER");
   app.register(articleRouter, { prefix: "/api/v1/articles" })
