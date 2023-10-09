@@ -1,3 +1,4 @@
-import repoRouter from './repo/repo.route';
+import {repoRouter} from './repo/repo.route';
+import {boxRouter} from './box/box.route';
 
-export { repoRouter };
+export { repoRouter, boxRouter };
