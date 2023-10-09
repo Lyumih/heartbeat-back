@@ -8,6 +8,7 @@ const db = new Database();
       RETURN ${now}
     `);
     const result = await cursor.next();
+    console.log(result)
     // ...
   } catch (err) {
     // ...
