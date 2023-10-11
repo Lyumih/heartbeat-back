@@ -14,9 +14,12 @@
   "license": "ISC",
   "dependencies": {
     "@fastify/cors": "^8.4.0",
+    "@types/orientjs": "^3.0.14",
     "arangojs": "^8.4.1",
     "dotenv": "^16.3.1",
-    "fastify": "^4.23.2"
+    "fastify": "^4.23.2",
+    "fastify-plugin": "^4.5.1",
+    "orientjs": "github:orientechnologies/orientjs#develop"
   },
   "devDependencies": {
     "@types/node": "^20.8.2",
