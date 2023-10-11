@@ -41,17 +41,41 @@ const App = (options: FastifyServerOptions) => {
     done()
   }))
 
+  app.addHook('preHandler', function (req, reply, done) {
+    // @ts-ignore
+    req.user = 'Bob Dylan'
+    done()
+  })
 
-  app.get('/test', async (fastify, req) => {
+
+  app.get('/test', async function(req, res) {
     // @ts-ignore
-    console.log(fastify.orient)
+    console.log(req.orient)
     // @ts-ignore
-    console.log(fastify['fastify-orient'])
+    console.log(req['fastify-orient'])
     // @ts-ignore
-    console.log(fastify.ttt)
-    // console.log(fastify.fff)
+    console.log(res.ttt)
+    // console.log(req)
+    // @ts-ignore
+    console.log('user',req.user, res.user)
+    // @ts-ignore
+    console.log(666,this)
+    console.log(666,this.orient)
     return '123'
   })
+
+  // @ts-ignore
+  console.log('or', fastify.ttt)
+
+  app.decorate('conf', {
+    db: 'some.db',
+    port: 3000
+  })
+
+  // @ts-ignore
+  console.log(app.conf.db)
+
+
 
   // OrientDBClient.connect({
   //   host: "localhost",
