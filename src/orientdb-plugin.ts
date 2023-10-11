@@ -1,30 +1,27 @@
 import fp from 'fastify-plugin'
-import {FastifyInstance, FastifyPluginAsync} from 'fastify'
-import { OrientDBClient } from 'orientjs';
+import { FastifyPluginAsync } from 'fastify'
+import { ODatabaseSession, OrientDBClient } from 'orientjs';
 
 declare module 'fastify' {
   interface FastifyInstance {
-    orient: {
-      hello: string
-    }
+    orient:  ODatabaseSession
   }
 }
 
 
 const fastifyOrient: FastifyPluginAsync = async (fastify, options) => {
-  // const client = await OrientDBClient.connect({
-  //   host: "localhost",
-  //   port: 2424
-  // })
-  // @ts-ignore
-  // if (!fastify.orient) {
-    // fastify.decorate('orient', new OrientDBClient());
-  fastify.decorate('orient', { hello: 'world' });
+  const client = await OrientDBClient.connect({
+    host: "localhost",
+    port: 2424
+  })
 
-  console.log('Decorated', fastify.orient)
-  console.log(options)
+  const session = await client.session({ name: "test", username: "root", password: "root" })
+
+  fastify.decorate('orient', session);
   fastify.addHook('onClose', () => {
     console.log("CLoSE Plugin")
+    session.close()
+    client.close()
   })
   // }
 
