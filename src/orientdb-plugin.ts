@@ -15,7 +15,7 @@ const fastifyOrient: FastifyPluginAsync = async (fastify, options) => {
     port: 2424
   })
 
-  const session = await client.session({ name: "test", username: "root", password: "root" })
+  const session = await client.session({ name: "heartbeat", username: "root", password: "root" })
 
   fastify.decorate('orient', session);
   fastify.addHook('onClose', () => {
